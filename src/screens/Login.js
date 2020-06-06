@@ -32,6 +32,7 @@ export default class Login extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.subContainer}>
         <Formik
           initialValues={{email: '', password: ''}}
           onSubmit={(values) => {
@@ -95,6 +96,7 @@ export default class Login extends React.Component {
           }}
           type='clear'
         />
+        </View>
       </SafeAreaView>
     );
   }
@@ -104,6 +106,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
+    justifyContent: 'center',
+  },
+  subContainer: {
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    marginLeft: 25,
+    marginRight: 25,
+    borderRadius: 10,
   },
   buttonContainer: {
     margin: 25,

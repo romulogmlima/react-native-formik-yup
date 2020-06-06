@@ -3,6 +3,7 @@ import {StyleSheet, SafeAreaView, View} from 'react-native';
 import {Button} from 'react-native-elements';
 import {Formik} from 'formik';
 import * as Yup from 'yup';
+
 import FormInput from '../components/FormInput';
 import FormButton from '../components/FormButton';
 import ErrorMessage from '../components/ErrorMessage';
@@ -39,6 +40,7 @@ export default class Signup extends React.Component {
   render() {
     return (
       <SafeAreaView style={styles.container}>
+        <View style={styles.subContainer}>
         <Formik
           initialValues={{
             name: '',
@@ -93,7 +95,7 @@ export default class Signup extends React.Component {
                 secureTextEntry
                 iconName="lock"
                 iconColor="#2C384A"
-                iconSize={24}
+                iconSize={25}
                 onBlur={handleBlur('password')}
               />
               <ErrorMessage errorValue={touched.password && errors.password} />
@@ -105,7 +107,7 @@ export default class Signup extends React.Component {
                 secureTextEntry
                 iconName="lock"
                 iconColor="#2C384A"
-                iconSize={24}
+                iconSize={25}
                 onBlur={handleBlur('confirmPassword')}
               />
               <ErrorMessage
@@ -130,6 +132,7 @@ export default class Signup extends React.Component {
           titleStyle={{color: '#039BE5'}}
           type="clear"
         />
+        </View>
       </SafeAreaView>
     );
   }
@@ -139,8 +142,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#f2f2f2',
+    justifyContent: 'center',
+  },
+  subContainer: {
+    flexDirection: 'column',
+    backgroundColor: '#fff',
+    marginLeft: 25,
+    marginRight: 25,
+    borderRadius: 10
   },
   buttonContainer: {
-    margin: 25,
+    margin: 35,
   },
 });

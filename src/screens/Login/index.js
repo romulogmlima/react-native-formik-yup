@@ -52,44 +52,44 @@ export default class Login extends React.Component {
               handleBlur,
               isSubmitting,
             }) => (
-                <Fragment>
-                  <FormInput
-                    name="email"
-                    value={values.email}
-                    onChangeText={handleChange('email')}
-                    placeholder="Enter email"
-                    autoCapitalize="none"
-                    iconName="envelope"
-                    iconColor="#2C384A"
-                    iconSize={18}
-                    onBlur={handleBlur('email')}
-                    autoFocus
+              <Fragment>
+                <FormInput
+                  name="email"
+                  value={values.email}
+                  onChangeText={handleChange('email')}
+                  placeholder="Enter email"
+                  autoCapitalize="none"
+                  iconName="envelope"
+                  iconColor="#2C384A"
+                  iconSize={18}
+                  onBlur={handleBlur('email')}
+                  autoFocus
+                />
+                <ErrorMessage errorValue={touched.email && errors.email} />
+                <FormInput
+                  name="password"
+                  value={values.password}
+                  onChangeText={handleChange('password')}
+                  placeholder="Enter password"
+                  secureTextEntry
+                  iconName="lock"
+                  iconColor="#2C384A"
+                  iconSize={24}
+                  onBlur={handleBlur('password')}
+                />
+                <ErrorMessage errorValue={touched.password && errors.password} />
+                <View style={styles.buttonContainer}>
+                  <FormButton
+                    buttonType="solid"
+                    onPress={handleSubmit}
+                    title="LOGIN"
+                    buttonColor="#fff"
+                    disabled={!isValid || isSubmitting}
+                    loading={isSubmitting}
                   />
-                  <ErrorMessage errorValue={touched.email && errors.email} />
-                  <FormInput
-                    name="password"
-                    value={values.password}
-                    onChangeText={handleChange('password')}
-                    placeholder="Enter password"
-                    secureTextEntry
-                    iconName="lock"
-                    iconColor="#2C384A"
-                    iconSize={24}
-                    onBlur={handleBlur('password')}
-                  />
-                  <ErrorMessage errorValue={touched.password && errors.password} />
-                  <View style={styles.buttonContainer}>
-                    <FormButton
-                      buttonType="solid"
-                      onPress={handleSubmit}
-                      title="LOGIN"
-                      buttonColor="#fff"
-                      disabled={!isValid || isSubmitting}
-                      loading={isSubmitting}
-                    />
-                  </View>
-                </Fragment>
-              )}
+                </View>
+              </Fragment>
+            )}
           </Formik>
           <Button
             title="Don't have an account? Sign Up"

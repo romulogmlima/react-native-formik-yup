@@ -5,15 +5,10 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,
+    paddingLeft: 20,
+    paddingRight: 20,
   },
-  Card: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    //backgroundColor: 'white',
-    borderRadius: 15,
-    height: '65%',
-    width: '85%',
-    paddingLeft: 15,
-    paddingRight: 15,
+  SubContainerButton: {
+    marginTop: 35,
   },
 });

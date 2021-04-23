@@ -16,7 +16,7 @@ const initialValues = {
 };
 
 const SignUp = ({navigation}) => {
-  const handleSubmit = values => {
+  const onSubmit = values => {
     setTimeout(() => {
       navigation.navigate('Home');
     }, 3000);
@@ -25,60 +25,67 @@ const SignUp = ({navigation}) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: handleSubmit,
+    onSubmit,
   });
+
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    isSubmitting,
+    isValid,
+    handleSubmit,
+  } = formik;
 
   return (
     <View style={styles.Container}>
-      <View style={styles.Card}>
-        <BasicInput
-          placeholder={'Enter your full name'}
-          iconName="user"
-          iconSize={20}
-          onChangeText={formik.handleChange('full_name')}
-          value={formik.values.full_name}
-          errorMessage={formik.touched.full_name && formik.errors.full_name}
-          onBlur={formik.handleBlur('full_name')}
-        />
-        <BasicInput
-          placeholder={'Enter email'}
-          iconName="envelope"
-          iconSize={20}
-          onChangeText={formik.handleChange('email')}
-          value={formik.values.email}
-          errorMessage={formik.touched.email && formik.errors.email}
-          onBlur={formik.handleBlur('email')}
-        />
-        <BasicInput
-          placeholder={'Enter password'}
-          iconName="lock"
-          iconSize={24}
-          onChangeText={formik.handleChange('password')}
-          value={formik.values.password}
-          errorMessage={formik.touched.password && formik.errors.password}
-          onBlur={formik.handleBlur('password')}
-        />
-        <BasicInput
-          placeholder={'Confirm password'}
-          iconName="lock"
-          iconSize={24}
-          onChangeText={formik.handleChange('password_confirmation')}
-          value={formik.values.password_confirmation}
-          errorMessage={
-            formik.touched.password_confirmation &&
-            formik.errors.password_confirmation
-          }
-          onBlur={formik.handleBlur('password_confirmation')}
-        />
+      <BasicInput
+        placeholder={'Enter your full name'}
+        iconName="user"
+        iconSize={20}
+        onChangeText={handleChange('full_name')}
+        value={values.full_name}
+        errorMessage={touched.full_name && errors.full_name}
+      />
+      <BasicInput
+        placeholder={'Enter email'}
+        iconName="envelope"
+        iconSize={20}
+        onChangeText={handleChange('email')}
+        value={values.email}
+        errorMessage={touched.email && errors.email}
+      />
+      <BasicInput
+        placeholder={'Enter password'}
+        iconName="lock"
+        iconSize={24}
+        secureTextEntry
+        onChangeText={handleChange('password')}
+        value={values.password}
+        errorMessage={touched.password && errors.password}
+      />
+      <BasicInput
+        placeholder={'Confirm password'}
+        iconName="lock"
+        iconSize={24}
+        secureTextEntry
+        onChangeText={handleChange('password_confirmation')}
+        value={values.password_confirmation}
+        errorMessage={
+          touched.password_confirmation && errors.password_confirmation
+        }
+      />
+      <BasicButton
+        title={'Sign up'}
+        width={200}
+        onPress={handleSubmit}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      />
+      <View style={styles.SubContainerButton}>
         <BasicButton
-          title={'Login'}
-          width={100}
-          onPress={formik.handleSubmit}
-          disabled={!formik.isValid || formik.isSubmitting}
-          loading={formik.isSubmitting}
-        />
-        <BasicButton
-          title={'Have an account? Login'}
+          title={'Already have an account? Login'}
           onPress={() => navigation.navigate('Login')}
           color="transparent"
           type="clear"

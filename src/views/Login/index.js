@@ -14,7 +14,7 @@ const initialValues = {
 };
 
 const Login = ({navigation}) => {
-  const handleSubmit = values => {
+  const onSubmit = values => {
     setTimeout(() => {
       navigation.navigate('Home');
     }, 3000);
@@ -23,35 +23,46 @@ const Login = ({navigation}) => {
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: handleSubmit,
+    onSubmit,
   });
+
+  const {
+    values,
+    touched,
+    errors,
+    handleChange,
+    isSubmitting,
+    isValid,
+    handleSubmit,
+  } = formik;
 
   return (
     <View style={styles.Container}>
-      <View style={styles.Card}>
-        <BasicInput
-          placeholder={'Enter e-mail'}
-          iconName="envelope"
-          iconSize={16}
-          onChangeText={formik.handleChange('email')}
-          value={formik.values.email}
-          errorMessage={formik.touched.email && formik.errors.email}
-        />
-        <BasicInput
-          placeholder={'Enter password'}
-          iconName="lock"
-          iconSize={22}
-          onChangeText={formik.handleChange('password')}
-          value={formik.values.password}
-          errorMessage={formik.touched.password && formik.errors.password}
-        />
-        <BasicButton
-          title={'Login'}
-          width={100}
-          onPress={formik.handleSubmit}
-          disabled={!formik.isValid || formik.isSubmitting}
-          loading={formik.isSubmitting}
-        />
+      <BasicInput
+        placeholder={'Enter e-mail'}
+        iconName="envelope"
+        iconSize={16}
+        onChangeText={handleChange('email')}
+        value={values.email}
+        errorMessage={touched.email && errors.email}
+      />
+      <BasicInput
+        placeholder={'Enter password'}
+        iconName="lock"
+        iconSize={22}
+        secureTextEntry
+        onChangeText={handleChange('password')}
+        value={values.password}
+        errorMessage={touched.password && errors.password}
+      />
+      <BasicButton
+        title={'Login'}
+        width={200}
+        onPress={handleSubmit}
+        disabled={!isValid || isSubmitting}
+        loading={isSubmitting}
+      />
+      <View style={styles.SignUp}>
         <BasicButton
           title={"Don't have an account? Sign Up"}
           onPress={() => navigation.navigate('SignUp')}
